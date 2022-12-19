@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import React,{useState} from "react";
 import './App.css';
+import UserList from "./component/Users/UserList";
+import UserInput from "./component/Users/UserInput";
+const App=()=>
+{
+  
+  const [userList,setUserList] = useState([]);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const addinputHandler = (uName,uAge) => {
+    setUserList((prevUserInput) => {
+      return [...prevUserInput,{name:uName,age:uAge,id:Math.random().toString()}];
+    })
+  } 
+return(
+  <div id="user-form">
+
+<UserInput onaddinput={addinputHandler}/>
+<UserList items={userList}/>
+</div>
+)
+
 }
-
 export default App;
