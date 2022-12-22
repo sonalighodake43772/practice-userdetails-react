@@ -13,11 +13,14 @@ const App=()=>
     })
   } 
 return(
-  <div id="user-form">
-
-<UserInput onaddinput={addinputHandler}/>
+  <React.Fragment>
+    <div id="user-form">
+    <UserInput onaddinput={addinputHandler}/>
 <UserList items={userList}/>
-</div>
+    </div>
+
+
+</React.Fragment>
 )
 
 }
