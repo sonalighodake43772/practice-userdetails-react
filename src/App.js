@@ -7,9 +7,9 @@ const App=()=>
   
   const [userList,setUserList] = useState([]);
 
-  const addinputHandler = (uName,uAge) => {
+  const addinputHandler = (uName,uAge,uCollege) => {
     setUserList((prevUserInput) => {
-      return [...prevUserInput,{name:uName,age:uAge,id:Math.random().toString()}];
+      return [...prevUserInput,{name:uName,age:uAge,collegename:uCollege,id:Math.random().toString()}];
     })
   } 
 return(
