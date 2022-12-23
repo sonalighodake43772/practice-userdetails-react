@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import Error from "../UI/Error";
 
 import Button from "../UI/Button";
@@ -6,23 +6,31 @@ import   './UserInput.css';
 
 const UserInput=(props)=>
 {
-    const[enterdName,setEnteredName]=useState('');
-    const[enterdAge,setEnteredAge]=useState('');
-    const [error, setError] = useState();
-    const setName = event => {
+   const nameInputRef = useRef();
+   const ageInputRef = useRef();
+   const collegeInputRef = useRef();
+    // const[enterdName,setEnteredName]=useState('');
+    // const[enterdAge,setEnteredAge]=useState('');
+     const [error, setError] = useState();
+    // const setName = event => {
        
-        setEnteredName(event.target.value);
-      };
-      const setAge = event => {
+    //     setEnteredName(event.target.value);
+    //   };
+    //   const setAge = event => {
        
-        setEnteredAge(event.target.value);
-      };
+    //     setEnteredAge(event.target.value);
+    //   };
     
 
     const formSubmitHandler = event => {
+
         event.preventDefault();
+        const enteredUserName= nameInputRef.current.value;
+        const enteredUserAge=ageInputRef.current.value;
+        const enteredUserCollege=collegeInputRef.current.value;
        
-        if(enterdName.trim().length===0 && enterdAge.trim().length===0)
+       
+        if(enteredUserName.trim().length===0 && enteredUserAge.trim().length===0 && enteredUserCollege.trim().length===0)
         {
           setError({
             title: 'Invalid input',
@@ -31,7 +39,7 @@ const UserInput=(props)=>
         return;
          
         }
-        if(enterdAge<1)
+        if(enteredUserAge<1)
         {
           setError({
             title: 'Invalid age',
@@ -39,9 +47,12 @@ const UserInput=(props)=>
           });
           return;
         }
-        props.onaddinput(enterdName,enterdAge);
-        setEnteredName('');
-        setEnteredAge('');
+        props.onaddinput(enteredUserName,enteredUserAge,enteredUserCollege);
+        // setEnteredName('');
+        // setEnteredAge('');
+        nameInputRef.current.value='';
+        ageInputRef.current.value='';
+        collegeInputRef.current.value='';
 
         
       };
@@ -63,8 +74,9 @@ const UserInput=(props)=>
           <input
             id="username"
             type="text"
-            value={enterdName}
-            onChange={setName}
+            // value={enterdName}
+            // onChange={setName}
+            ref={nameInputRef}
         
           />
         <br/>    <br/>
@@ -73,10 +85,22 @@ const UserInput=(props)=>
           <input
             id="age"
             type="number"
-            value={enterdAge}
-            onChange={setAge}
-          />
+            // value={enterdAge}
+            // onChange={setAge}
+            ref={ageInputRef}
+            
+            />
                <br/>   <br/>  
+               <label htmlFor="collegename">CollegeName</label>
+          <input
+            id="collegename"
+            type="text"
+            // value={enterdName}
+            // onChange={setName}
+            ref={collegeInputRef}
+        
+          />
+          <br/>   <br/>  
           <Button type="submit">Add User</Button>
         </form>
       </div>
